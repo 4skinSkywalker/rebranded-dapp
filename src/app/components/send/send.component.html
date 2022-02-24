@@ -1,139 +1,143 @@
-<div class="d-none d-md-block custom-card-header card-header">
-    <h4 class="card-title">{{
-        mode === ONE_WAY ?
-            "send" :
-            "otc trade"
-    }}</h4>
-    <small class="card-text text-muted">{{
-        mode === ONE_WAY ?
-            "Safely send tokens through ebox." :
-            "Exchange tokens trustlessly through ebox."
-    }}</small>
-</div>
+<app-main-card>
 
-<form #form class="custom-card-body position-relative card-body" (submit)="$event.preventDefault(); send();" ngNativeValidate>
-
-    <app-loading [id]="mode"></app-loading>
-
-    <div class="d-flex flex-column gap-2">
-        <label class="form-label">
-            <span>Recipient*</span>
-            <div class="position-relative">
-    
-                <!-- Recipient input -->
-                <input #recipient name="recipient" type="text" class="form-control" required pattern="^0x[a-fA-F0-9]{40}$" appCustomValidationMessage validationMessage="Enter (or choose) a valid recipient." (change)="queryParamsFromFields();" checkForChange="true">
-    
-                <button type="button" style="right: .2rem;" class="position-absolute top-50 translate-middle-y btn btn-dark btn-sm" (click)="spawnAddressbook();"><i class="bi bi-person-fill"></i></button>
-            </div>
-        </label>
-        
-        <label class="form-label">
-            <span>Passphrase</span>
-            <div class="position-relative">
-    
-                <!-- Passphrase input -->
-                <input #passphrase name="pass" type="password" class="form-control">
-    
-                <button type="button" style="right: .2rem;" class="position-absolute top-50 translate-middle-y btn btn-dark btn-sm" appPasswordToggler [myToggleTarget]="passphrase"><i class="bi bi-eye-fill"></i></button>
-            </div>
-        </label>
-        
-        <label class="form-label">
-            <span>Send amount*</span>
-            <div class="position-relative">
-    
-                <!-- Send amount input -->
-                <input #sendAmount name="sendValueDecimal" type="text" class="form-control"
-                    required
-                    appCustomValidationMessage
-                    validationMessage="Enter a valid send amount."
-                    (change)="queryParamsFromFields();"
-                    [pattern]="CURRENCY_REGEX" 
-                    (blur)="sendAmount.value = mask(sendAmount.value);"
-                    (focus)="sendAmount.value = unmask(sendAmount.value);"
-                >
-    
-                <button type="button" style="right: .2rem;" class="position-absolute top-50 translate-middle-y btn btn-dark btn-sm" (click)="spawnTokenSelector('send');">
-                    
-                    <!-- Spinner or token amount -->
-                    <div class="d-inline-flex align-items-center gap-1">
-                        <div *ngIf="tokenDecimalBalance === null" class="spinner-border spinner-border-sm text-light"></div>
-                        <span *ngIf="tokenDecimalBalance">{{ tokenDecimalBalance | multiplierFormatter }}</span>
-                        <span #sendTokenSymbol class="text-uppercase">--</span>
-                        <i class="bi bi-caret-down-fill"></i>
-                    </div>
-    
-                    <!-- Send token input -->
-                    <input appInvisibleInput #sendTokenAddress name="sendToken" type="text" required appCustomValidationMessage validationMessage="Choose a send token." checkForChange="true">
-                </button>
-            </div>
-        </label>
-    
-        <label class="form-label" *ngIf="mode === OTC_TRADE">
-            <span>Request amount*</span>
-            <div class="position-relative">
-    
-                <!-- Request amount input -->
-                <input #requestAmount name="requestValueDecimal" type="text" class="form-control"
-                    required
-                    appCustomValidationMessage
-                    validationMessage="Enter a valid request amount."
-                    (change)="queryParamsFromFields();"
-                    [pattern]="CURRENCY_REGEX" 
-                    (blur)="requestAmount.value = mask(requestAmount.value);"
-                    (focus)="requestAmount.value = unmask(requestAmount.value);"
-                >
-    
-                <button type="button" style="right: .2rem;" class="position-absolute top-50 translate-middle-y btn btn-dark btn-sm" (click)="spawnTokenSelector('request');">
-                    <span #requestTokenSymbol class="text-uppercase me-1">-</span>
-                    <i class="bi bi-caret-down-fill"></i>
-    
-                    <!-- Request token input -->
-                    <input appInvisibleInput #requestTokenAddress name="requestToken" type="text" required appCustomValidationMessage validationMessage="Choose a request token." checkForChange="true">
-    
-                </button>
-            </div>
-        </label>
-    
-        <button type="button" class="ctrl-arrow-rx btn collapsed" data-bs-toggle="collapse" data-bs-target="#contents-collapse" style="align-self: end;">Advanced</button>
-        <div class="ps-3 collapse" id="contents-collapse">
-            <div class="d-grid gap-3">
-    
-                <div *ngIf="mode === ONE_WAY" class="d-grid" style="grid-template-columns: auto max-content; align-items: center;">
-                    <div>
-                        <label class="form-check-label d-block fw-bolder" for="privacy-mode">Privacy mode</label>
-                        <small class="text-muted">Little explanation on what privacy mode is.<br>What does it do specifically and all that.</small>
-                    </div>
-                    <div class="form-check form-switch">
-    
-                        <!-- Privacy mode input -->
-                        <input #privacyMode class="form-check-input" type="checkbox">
-    
-                    </div>
-                </div>
-    
-                <div class="d-grid" style="grid-template-columns: auto max-content; align-items: center;">
-                    <div>
-                        <label class="form-check-label d-block fw-bolder" for="keep-inputs">Keep inputs after sending</label>
-                        <small class="text-muted">Little explanation on what privacy mode is.<br>What does it do specifically and all that.</small>
-                    </div>
-                    <div class="form-check form-switch">
-    
-                        <!-- Keep inputs input -->
-                        <input #keepInputs class="form-check-input" type="checkbox">
-    
-                    </div>
-                </div>
-    
-            </div>
+    <ng-container class="c-header">
+        <div class="d-none d-md-block pb-3">
+            <h4 class="card-title">{{
+                mode === ONE_WAY ?
+                    "send" :
+                    "otc trade"
+            }}</h4>
+            <small class="card-text text-muted">{{
+                mode === ONE_WAY ?
+                    "Safely send tokens through ebox." :
+                    "Exchange tokens trustlessly through ebox."
+            }}</small>
         </div>
-    
-        <button type="submit" class="btn btn-primary mt-3">send</button>
-    </div>
+    </ng-container>
 
+    <ng-container class="c-body">
+        <form #form class="p-3" (submit)="$event.preventDefault(); send();" ngNativeValidate>
 
-</form>
+            <app-loading [id]="mode"></app-loading>
+        
+            <div class="d-flex flex-column gap-2">
+                <label class="form-label">
+                    <span>Recipient*</span>
+                    <div class="position-relative">
+            
+                        <!-- Recipient input -->
+                        <input #recipient name="recipient" type="text" class="form-control" required pattern="^0x[a-fA-F0-9]{40}$" appCustomValidationMessage validationMessage="Enter (or choose) a valid recipient." (change)="queryParamsFromFields();" checkForChange="true">
+            
+                        <button type="button" style="right: .2rem;" class="position-absolute top-50 translate-middle-y btn btn-dark btn-sm" (click)="spawnAddressbook();"><i class="bi bi-person-fill"></i></button>
+                    </div>
+                </label>
+                
+                <label class="form-label">
+                    <span>Passphrase</span>
+                    <div class="position-relative">
+            
+                        <!-- Passphrase input -->
+                        <input #passphrase name="pass" type="password" class="form-control">
+            
+                        <button type="button" style="right: .2rem;" class="position-absolute top-50 translate-middle-y btn btn-dark btn-sm" appPasswordToggler [myToggleTarget]="passphrase"><i class="bi bi-eye-fill"></i></button>
+                    </div>
+                </label>
+                
+                <label class="form-label">
+                    <span>Send amount*</span>
+                    <div class="position-relative">
+            
+                        <!-- Send amount input -->
+                        <input #sendAmount name="sendValueDecimal" type="text" class="form-control"
+                            required
+                            appCustomValidationMessage
+                            validationMessage="Enter a valid send amount."
+                            (change)="queryParamsFromFields();"
+                            [pattern]="CURRENCY_REGEX" 
+                            (blur)="sendAmount.value = mask(sendAmount.value);"
+                            (focus)="sendAmount.value = unmask(sendAmount.value);"
+                        >
+            
+                        <button type="button" style="right: .2rem;" class="position-absolute top-50 translate-middle-y btn btn-dark btn-sm" (click)="spawnTokenSelector('send');">
+                            
+                            <!-- Spinner or token amount -->
+                            <div class="d-inline-flex align-items-center gap-1">
+                                <div *ngIf="tokenDecimalBalance === null" class="spinner-border spinner-border-sm text-light"></div>
+                                <span *ngIf="tokenDecimalBalance">{{ tokenDecimalBalance | multiplierFormatter }}</span>
+                                <span #sendTokenSymbol class="text-uppercase">--</span>
+                                <i class="bi bi-caret-down-fill"></i>
+                            </div>
+            
+                            <!-- Send token input -->
+                            <input appInvisibleInput #sendTokenAddress name="sendToken" type="text" required appCustomValidationMessage validationMessage="Choose a send token." checkForChange="true">
+                        </button>
+                    </div>
+                </label>
+            
+                <label class="form-label" *ngIf="mode === OTC_TRADE">
+                    <span>Request amount*</span>
+                    <div class="position-relative">
+            
+                        <!-- Request amount input -->
+                        <input #requestAmount name="requestValueDecimal" type="text" class="form-control"
+                            required
+                            appCustomValidationMessage
+                            validationMessage="Enter a valid request amount."
+                            (change)="queryParamsFromFields();"
+                            [pattern]="CURRENCY_REGEX" 
+                            (blur)="requestAmount.value = mask(requestAmount.value);"
+                            (focus)="requestAmount.value = unmask(requestAmount.value);"
+                        >
+            
+                        <button type="button" style="right: .2rem;" class="position-absolute top-50 translate-middle-y btn btn-dark btn-sm" (click)="spawnTokenSelector('request');">
+                            <span #requestTokenSymbol class="text-uppercase me-1">-</span>
+                            <i class="bi bi-caret-down-fill"></i>
+            
+                            <!-- Request token input -->
+                            <input appInvisibleInput #requestTokenAddress name="requestToken" type="text" required appCustomValidationMessage validationMessage="Choose a request token." checkForChange="true">
+            
+                        </button>
+                    </div>
+                </label>
+            
+                <button type="button" class="ctrl-arrow-rx btn collapsed" data-bs-toggle="collapse" data-bs-target="#contents-collapse" style="align-self: end;">Advanced</button>
+                <div class="ps-3 collapse" id="contents-collapse">
+                    <div class="d-grid gap-3">
+            
+                        <div *ngIf="mode === ONE_WAY" class="d-grid" style="grid-template-columns: auto max-content; align-items: center;">
+                            <div>
+                                <label class="form-check-label d-block fw-bolder" for="privacy-mode">Privacy mode</label>
+                                <small class="text-muted">Little explanation on what privacy mode is.<br>What does it do specifically and all that.</small>
+                            </div>
+                            <div class="form-check form-switch">
+            
+                                <!-- Privacy mode input -->
+                                <input #privacyMode class="form-check-input" type="checkbox">
+            
+                            </div>
+                        </div>
+            
+                        <div class="d-grid" style="grid-template-columns: auto max-content; align-items: center;">
+                            <div>
+                                <label class="form-check-label d-block fw-bolder" for="keep-inputs">Keep inputs after sending</label>
+                                <small class="text-muted">Little explanation on what privacy mode is.<br>What does it do specifically and all that.</small>
+                            </div>
+                            <div class="form-check form-switch">
+            
+                                <!-- Keep inputs input -->
+                                <input #keepInputs class="form-check-input" type="checkbox">
+            
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            
+                <button type="submit" class="btn btn-primary mt-3">send</button>
+            </div>
+        
+        
+        </form>
+    </ng-container>
 
-<div class="custom-card-footer card-footer text-muted">
-    <app-connection-info></app-connection-info>
-</div>
+</app-main-card>

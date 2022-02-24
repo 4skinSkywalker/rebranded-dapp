@@ -1571,11 +1571,22 @@ let REEF_TESTNET: Token[] = [
   }
 ];
 
+let MOONBEAM_MAINNET: Token[] = [
+  {
+    "name": "Moonbeam",
+    "symbol": "GLMR",
+    "thumb": "https://assets.coingecko.com/coins/images/22459/small/glmr.png",
+    "address": "0x0000000000000000000000000000000000000000",
+    "decimals": 18,
+    "isBase": true
+  }
+];
+
 let MOONRIVER_MAINNET: Token[] = [
   {
     "name": "Moonriver",
     "symbol": "MOVR",
-    "thumb": "https://assets.coingecko.com/coins/images/17984/small/9285.png?1630028620",
+    "thumb": "https://assets.coingecko.com/coins/images/17984/small/9285.png",
     "address": "0x0000000000000000000000000000000000000000",
     "decimals": 18,
     "isBase": true
@@ -1591,6 +1602,7 @@ let chainTokenDict = {
   80001: MATIC_TESTNET,
   "reef-mainnet": REEF_MAINNET,
   "reef-testnet": REEF_TESTNET,
+  1284: MOONBEAM_MAINNET,
   1285: MOONRIVER_MAINNET
 };
 

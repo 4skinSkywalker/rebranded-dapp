@@ -13,8 +13,7 @@ import { BoxInputs } from './box-inputs';
 
 @Component({
   selector: 'app-send',
-  templateUrl: './send.component.html',
-  styleUrls: ['./send.component.css']
+  templateUrl: './send.component.html'
 })
 export class SendComponent implements OnInit, AfterViewInit {
 

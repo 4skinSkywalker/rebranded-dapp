@@ -3,7 +3,9 @@
         <h4 class="card-title">box details</h4>
         <small class="card-text text-muted">A box you've {{ mode === "incoming" ? "received" : "sent" }}.</small>
     </div>
-    <a class="link-unstyled ms-auto ctrl-arrow-sx" routerLink="..">
+    <a
+        class="link-unstyled ms-auto ctrl-arrow-sx"
+        [routerLink]="(typeOfBox === 'private') ? '../..' : '..'">
         Back {{ mode }}
     </a>
 </div>

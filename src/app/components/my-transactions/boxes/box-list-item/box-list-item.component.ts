@@ -27,7 +27,10 @@ export class BoxListItemComponent implements OnInit {
   }
 
   goToDetails() {
-    this.router.navigate(["./", this.box.id], { relativeTo: this.route });
+    if (this.box.isPrivate)
+      this.router.navigate(["./", "private", this.box.id], { relativeTo: this.route });
+    else
+      this.router.navigate(["./", this.box.id], { relativeTo: this.route });
   }
 
 }

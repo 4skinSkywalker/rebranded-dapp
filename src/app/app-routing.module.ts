@@ -70,12 +70,22 @@ const routes: Routes = [
       {
         path: "transactions/incoming/:boxId",
         component: BoxDetailsComponent,
-        data: { mode: "incoming" },
+        data: { mode: "incoming", typeOfBox: "normal" },
       },
       {
         path: "transactions/outgoing/:boxId",
         component: BoxDetailsComponent,
-        data: { mode: "outgoing" },
+        data: { mode: "outgoing", typeOfBox: "normal" },
+      },
+      {
+        path: "transactions/incoming/private/:boxId",
+        component: BoxDetailsComponent,
+        data: { mode: "incoming", typeOfBox: "private" },
+      },
+      {
+        path: "transactions/outgoing/private/:boxId",
+        component: BoxDetailsComponent,
+        data: { mode: "outgoing", typeOfBox: "private" },
       },
       {
         path: "staking",

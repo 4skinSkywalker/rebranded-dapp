@@ -90,8 +90,8 @@ export class ConnectionService {
         div.innerHTML = `
           <div class="position-fixed top-0 start-0 w-100 h-100" style="z-index: 99999; background-color: #000d;">
             <div class="position-absolute bottom-0 w-100 px-3 py-5 bg-danger text-white text-center text-lg-start">
-              <div class="display-6">Unsupported network.</div>
-              <div class="fs-4">Use Ethereum mainnet, Rinkeby, Binance mainnet | testnet, Matic mainnet, Mumbai, Reef mainnet | testnet.</div>
+              <div class="display-6">Unsupported network!</div>
+              <div class="fs-4">We are currently live on Ethereum, Binance Smart Chain, Polygon, Reef Chain, Moonbeam &amp; Moonriver (Testnets: Rinkeby, BSC, Polygon).</div>
           </div>
         `;
         document.body.appendChild(div.firstElementChild);
@@ -140,56 +140,62 @@ export class ConnectionService {
     switch ((this.chainId$.getValue() || -1).toString()) {
       case "reef-mainnet":
         return {
-          name: "Reef Testnet",
-          thumb: "https://assets.coingecko.com/coins/images/13504/small/Group_10572.png?1610534130",
+          name: "Reef Chain",
+          thumb: "https://assets.coingecko.com/coins/images/13504/small/Group_10572.png",
           accountScannerUrl: (address) => `https://reefscan.com/account/${address}`
         };
       case "reef-testnet":
         return {
           name: "Reef Testnet",
-          thumb: "https://assets.coingecko.com/coins/images/13504/small/Group_10572.png?1610534130",
+          thumb: "https://assets.coingecko.com/coins/images/13504/small/Group_10572.png",
           accountScannerUrl: (address) => `https://testnet.reefscan.com/account/${address}`
         };
       case "1":
         return {
-          name: "Ethereum Mainnet",
+          name: "Ethereum",
           thumb: "https://assets.coingecko.com/coins/images/279/thumb/ethereum.png",
           accountScannerUrl: (address) => `https://etherscan.io/address/${address}`
         };
       case "4":
         return {
-          name: "Ethereum Testnet",
+          name: "Rinkeby Testnet",
           thumb: "https://assets.coingecko.com/coins/images/279/thumb/ethereum.png",
           accountScannerUrl: (address) => `https://rinkeby.etherscan.io/address/${address}`
         };
       case "56":
         return {
-          name: "Binance Mainnet",
+          name: "Binance Smart Chain",
           thumb: "https://v1exchange.pancakeswap.finance/images/coins/bnb.png",
           accountScannerUrl: (address) => `https://bscscan.com/address/${address}`
         };
       case "97":
         return {
-          name: "Binance Testnet",
+          name: "BSC Testnet",
           thumb: "https://v1exchange.pancakeswap.finance/images/coins/bnb.png",
           accountScannerUrl: (address) => `https://testnet.bscscan.com/address/${address}`
         };
       case "137":
         return {
-          name: "Matic Mainnet",
+          name: "Polygon",
           thumb: "https://assets.coingecko.com/coins/images/4713/thumb/matic___polygon.jpg",
           accountScannerUrl: (address) => `https://polygonscan.com/address/${address}`
         };
       case "80001":
         return {
-          name: "Matic Testnet",
+          name: "Polygon Testnet",
           thumb: "https://assets.coingecko.com/coins/images/4713/thumb/matic___polygon.jpg",
           accountScannerUrl: (address) => `https://mumbai.polygonscan.com/address/${address}`
         };
+      case "1284":
+        return {
+          name: "Moonbeam",
+          thumb: "https://assets.coingecko.com/coins/images/22459/small/glmr.png",
+          accountScannerUrl: (address) => `https://moonscan.io/address/${address}`
+        };
       case "1285":
         return {
-          name: "Moonriver Mainnet",
-          thumb: "https://assets.coingecko.com/coins/images/17984/small/9285.png?1630028620",
+          name: "Moonriver",
+          thumb: "https://assets.coingecko.com/coins/images/17984/small/9285.png",
           accountScannerUrl: (address) => `https://moonriver.moonscan.io/address/${address}`
         };
       default:

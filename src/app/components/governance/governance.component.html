@@ -1,22 +1,22 @@
-<div class="custom-card-header card-header pb-0">
-    <div class="d-none d-md-block mb-3">
-        <h4 class="card-title">governance</h4>
-        <small class="card-text text-muted">Everyone holding 1 EBOX or above is eligible to voice their opinion in community-related decisions. Votes are weighted accordingly with token balance.<br>For governance explained, <a href="https://ebox-official.medium.com/ethbox-introducing-governance-540f237cda3e" target="_blank">click here</a>.</small>
-    </div>
-    <ul class="nav nav-tabs border-bottom-0">
-        <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" [routerLink]="['project']">Project</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" [routerLink]="['community']">Community</a>
-        </li>
-    </ul>
-</div>
+<app-main-card>
 
-<div class="custom-card-body position-relative card-body p-0">
-    <router-outlet></router-outlet>
-</div>
+    <ng-container class="c-header">
+        <div class="d-none d-md-block mb-3">
+            <h4 class="card-title">governance</h4>
+            <small class="card-text text-muted">Everyone holding 1 EBOX or above is eligible to voice their opinion in community-related decisions. Votes are weighted accordingly with token balance.<br>For governance explained, <a href="https://ebox-official.medium.com/ethbox-introducing-governance-540f237cda3e" target="_blank">click here</a>.</small>
+        </div>
+        <ul class="nav nav-tabs border-bottom-0">
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['project']">Project</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['community']">Community</a>
+            </li>
+        </ul>
+    </ng-container>
 
-<div class="custom-card-footer card-footer text-muted">
-    <app-connection-info></app-connection-info>
-</div>
+    <ng-container class="c-body">
+        <router-outlet></router-outlet>
+    </ng-container>
+
+</app-main-card>

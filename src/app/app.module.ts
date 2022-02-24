@@ -50,6 +50,7 @@ import { VotersComponent } from './components/modals/governance/voters/voters.co
 import { VotingDetailsModalComponent } from './components/modals/governance/voting-details-modal/voting-details-modal.component';
 import { ChooseNetworkComponent } from './components/modals/providers/choose-network/choose-network.component';
 import { PolkadotProviderModalComponent } from './components/modals/providers/polkadot-provider-modal/polkadot-provider-modal.component';
+import { MainCardComponent } from './components/main/main-card/main-card.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import { PolkadotProviderModalComponent } from './components/modals/providers/po
     VotersComponent,
     VotingDetailsModalComponent,
     ChooseNetworkComponent,
-    PolkadotProviderModalComponent
+    PolkadotProviderModalComponent,
+    MainCardComponent
   ],
   imports: [
     BrowserModule,

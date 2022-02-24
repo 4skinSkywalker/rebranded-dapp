@@ -90,6 +90,9 @@ export class EboxService {
           this.dappContractAddress = ETHBOX.ADDRESSES.MATIC_TESTNET;
           this.tokenDispenserContractAddress = TOKEN_DISPENSER.ADDRESSES.MATIC_TESTNET;
           break;
+        case "1284":        // Moonbeam Mainnet
+          this.dappContractAddress = ETHBOX.ADDRESSES.MOONBEAM;
+          break;
         case "1285":        // Moonriver Mainnet
           this.dappContractAddress = ETHBOX.ADDRESSES.MOONRIVER;
           break;

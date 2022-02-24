@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-governance',
-  templateUrl: './governance.component.html',
-  styleUrls: ['./governance.component.css']
+  templateUrl: './governance.component.html'
 })
 export class GovernanceComponent implements OnInit {
 
