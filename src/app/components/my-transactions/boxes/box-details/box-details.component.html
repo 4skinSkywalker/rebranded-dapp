@@ -147,13 +147,10 @@
                     <div class="fw-bold">
                         {{ mode === "incoming" ? "Sender" : "Recipient" }}
                     </div>
-                    <div *ngIf="box.isPrivate || mode === 'incoming' ? box.senderName : box.recipientName" class="fs-4" style="margin-bottom: -8px;">
-                        {{ (box.isPrivate ?
-                            "Anonymous" :
-                            mode === "incoming" ?
-                                box.senderName :
-                                box.recipientName
-                        ) }}
+                    <div *ngIf="box.isPrivate || (mode === 'incoming' ? box.senderName : box.recipientName)"
+                        class="fs-4"
+                        style="margin-bottom: -8px;">
+                        {{ (box.isPrivate ? "Anonymous" : mode === "incoming" ? box.senderName : box.recipientName) }}
                     </div>
                 </div>
                 <small>
